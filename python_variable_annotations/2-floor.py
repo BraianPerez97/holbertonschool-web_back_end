@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """function to return a float"""
-from typing import Tuple
-from math import floor
 
 
 def floor(n: float) -> int:
