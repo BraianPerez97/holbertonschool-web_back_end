@@ -12,4 +12,4 @@ def concat(str1: str, str2: str) -> str:
     Returns:
         str: A string that containing str1 followed by str2.
     """
-    return str1 + str2
+    return "{}{}".format(str1, str2)

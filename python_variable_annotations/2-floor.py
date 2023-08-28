@@ -11,4 +11,4 @@ def floor(n: float) -> int:
     Returns:
         int: the floor of the float n, the largest integer <= n.
     """
-    return floor(n)
+    return int(n)
