@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Wait randomly between 0 and max_delay seconds"""
 
-import asyncio
 import random
+import asyncio
 
 
 async def wait_random(max_delay=10):
