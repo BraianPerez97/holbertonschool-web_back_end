@@ -1,0 +1,4 @@
+// Delete all documents with name="Holberton school"
+debugger.school.deleteMany(
+    {"name": "Holberton school"}
+)
