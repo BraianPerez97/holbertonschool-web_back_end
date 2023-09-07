@@ -14,12 +14,5 @@ def schools_by_topics(mongo_collection, topic):
     Returns:
         list: list of dictionaries representing schools that have a specific topic
     """
-
-    query = {'topic': topic}
-    project = {'name': 1}
-    schools = []
-
-    for school in mongo_collection.find(filter=query, projection=project):
-        schools.append(school)
-
+    schools = mongo_collection.find({"topics": {"$in": [topic]}})
     return schools
