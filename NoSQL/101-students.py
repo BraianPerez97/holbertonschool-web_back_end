@@ -1,41 +1,37 @@
 #!/usr/bin/env python3
 import pymongo
+"""Module to get top students from MongDB"""
 
-# Function to return students sorted by average score
 def top_students(mongo_collection):
+    """Get students sorted by average score
 
-  # Aggregation pipeline 
-  # 1) Calculate average score for each student
-  # 2) Sort students by descending average score
-  results = mongo_collection.aggregate([
+    Args:
+        mongo_collection: PyMongo collection object
+
+    Returns:
+        list: List of dictionaries eith students name and averager score.
+    """
+    results = mongo_collection.aggregate([
     {
       '$project': { 
-        '_id': 0, # Exclude _id from results 
-        'name': 1, # Include name field
+        '_id': 0, 
+        'name': 1,
         'averageScore': {  
-          '$avg': '$scores' # Calculate average of scores array
+          '$avg': '$scores'
         }
       }
     },
     {
       '$sort': {
-        'averageScore': -1 # Sort by averageScore descending
+        'averageScore': -1 
       }
     }
   ])
+    return list(results) 
 
-  # Return aggregation results as a list
-  return list(results) 
-
-# Example usage:
-
-# Connect to MongoDB 
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client['students_db']
 collection = db['grades'] 
 
-# Call top_students function to get list of top students
-top_students = top_students(collection)  
-
-# Print top students
+top_students = top_students(collection)
 print(top_students)
