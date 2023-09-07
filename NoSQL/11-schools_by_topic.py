@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
-"""
-This script defines a function for updating topics in a Mongo DB  collection.
+import pymongo
+"""This script defines a funcion that returns list of
+ schools thath hace a specific subject
 """
 
-def update_topic(mongo_collection, name, topics):
-    """
-    Update the 'topics' field for documents with the specifies 'name' in MongoDB collection.
+def schools_by_topics(mongo_collection, topic):
+    """Returns list of schools that hace a specific topic
 
     Args:
-        mongo_collection (pymongo.collection.Collection): The MongoDB collectipn to update documents in.
-        name (str): The name to identifi the documents to be updated.
-        topics (list): The list of topics to set for the documents.
+        mongo_collection: the pymongo collection object
+        topic (str): the topic name to search for.
+    
     Returns:
-    pymongo.result.UpdateResult: The results of the updated operation, including the number of documents modified
+        list: list of dictionaries representing schools that have a specific topic
     """
-    result = mongo_collection.update.many(
-        {"name": name}, {'$set' : {'topics': topics}})
 
-    return result
+    query = {'topic': topic}
+    project = {'name': 1}
+    schools = []
+
+    for school in mongo_collection.find(filter=query, projection=project):
+        schools.append(school)
+
+    return schools
