@@ -78,14 +78,18 @@ class Server:
             'total_pages': total_pages
         }
     
-        def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-            """method that returns  dictionary of hyper_index"""
+        def get_hyper_index(self, index: int = None,
+                             page_size: int = 10) -> Dict:
+            """method that returns  dictionary of hyper_index
+            """
 
             assert index is not None and index < len(self.__indexed_dataset)
             
-            data = list(self.__indexed_dataset.values())[index:index + page_size]
+            data = list(self.__indexed_dataset.values()
+                        )[index:index + page_size]
 
-            next_index = index + page_size if index + page_size < len(self.__indexed_dataset) else None
+            next_index = index + page_size if index + \
+                page_size < len(self.__indexed_dataset)else None
 
             return {
                 'index': index,
