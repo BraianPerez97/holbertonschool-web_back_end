@@ -12,8 +12,8 @@ def list_all(mongo_collection):
 
     Returns:
         list: A list containing all documents in the collection.
-    """
-    result = mongo_collection.school.find()
-    if result:
-        return result
-    return []
+    """ 
+    if mongo_collection is None:
+        return []
+    result = mongo_collection.find()
+    return [results for results in result]
