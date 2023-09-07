@@ -1,17 +1,33 @@
 #!/usr/bin/env python3
 """
-This script defines a function for retrieving schools by a specific topic from a MongoDB collection.
+Provides some stats about Nginx logs stored in MongoDB
 """
+from pymongo import MongoClient
 
-def schools_by_topic(mongo_collection, topic):
+
+METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+
+
+def log_stats(mongo_collection, option=None):
+    """ 
+    script that provides stats
     """
-    Retrieve schools that match a specific topic from a MongoDB collection.
+    items = {}
+    if option:
+        value = mongo_collection.count_documents(
+            {"method": {"$regex": option}})
+        print(f"\tmethod {option}: {value}")
+        return
 
-    Args:
-        mongo_collection (pymongo.collection.Collection): The MongoDB collection containing school data.
-        topic (str): The topic to search for within the 'topics' field of the documents.
+    result = mongo_collection.count_documents(items)
+    print(f"{result} logs")
+    print("Methods:")
+    for method in METHODS:
+        log_stats(nginx_collection, method)
+    status_check = mongo_collection.count_documents({"path": "/status"})
+    print(f"{status_check} status check")
 
-    Returns:
-        pymongo.cursor.Cursor: A cursor containing the results of the search query.
-    """
-    return mongo_collection.find({"topics": topic})
+
+if __name__ == "__main__":
+    nginx_collection = MongoClient('mongodb://127.0.0.1:27017').logs.nginx
+    log_stats(nginx_collection)

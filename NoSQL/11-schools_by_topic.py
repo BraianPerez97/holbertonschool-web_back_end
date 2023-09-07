@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-import pymongo
 """This script defines a funcion that returns list of
  schools thath hace a specific subject
 """
+import pymongo
+
 
 def schools_by_topics(mongo_collection, topic):
     """Returns:
