@@ -6,8 +6,7 @@ import pymongo
 
 
 def schools_by_topics(mongo_collection, topic):
-    """Returns:
-        list: list of dictionaries representing schools that have a specific topic
+    """Returns list of dictionaries representing schools that have a specific topic
     """
     schools = mongo_collection.find({"topics": {"$in": [topic]}})
     return schools
