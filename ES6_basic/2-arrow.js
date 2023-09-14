@@ -1,17 +1,9 @@
 export default function getNeighborhoodsList() {
-
-    this.sanFrancisoNeighborhood = ['SOMA', 'Union Square'];
-
-    thisadd.Neighborhood = (newNeighborhood) =>{
-        this.sanFranciscoNeighborhood.push(newNeighborhood);
-        return this.sanFranciscpNeighborhood;
+    this.sanFranciscoNeighborhoods = ['SOMA', 'Union Square'];
+  
+    const self = this;
+    this.addNeighborhood = (newNeighborhood) => {
+      self.sanFranciscoNeighborhoods.push(newNeighborhood);
+      return self.sanFranciscoNeighborhoods;
     };
-}
-
-import getNeighborhoodsList from './2-arrow.js';
-
-const neighborhoodsList = new getNeighborhoodsList();
-
-const res = neighborhoodList.addNeighborhood('Noe Valley');
-
-console.log(res);
+  }
