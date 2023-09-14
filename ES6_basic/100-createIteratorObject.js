@@ -1,7 +1,31 @@
-export default function createIteratorObject(Report) {
-    let results = [];
-    for (const value of Object.values(Report.allEmployees)) {
-        results = [...results, ...value];
-    }
-    return results
+export default function createIteratorObject(report) {
+  const departments = Object.keys(report.allEmployees);
+  let departmentIndex = 0;
+  let employeeIndex = 0;
+
+  const iterator = {
+    next() {
+      if (departmentIndex < departments.length) {
+        const department = departments[departmentIndex];
+        const employeesInDepartment = report.allEmployees[department];
+
+        if (employeeIndex < employeesInDepartment.length) {
+          const employee = employeesInDepartment[employeeIndex];
+          employeeIndex++;
+          return { value: employee, done: false };
+        } else {
+          departmentIndex++;
+          employeeIndex = 0;
+          return this.next();
+        }
+      } else {
+        return { done: true };
+      }
+    },
+    [Symbol.iterator]() {
+      return this;
+    },
+  };
+
+  return iterator;
 }
