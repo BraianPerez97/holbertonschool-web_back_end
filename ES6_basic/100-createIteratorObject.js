@@ -13,14 +13,12 @@ export default function createIteratorObject(report) {
           const employee = employeesInDepartment[employeeIndex];
           employeeIndex++;
           return { value: employee, done: false };
-        } else {
-          departmentIndex++;
-          employeeIndex = 0;
-          return this.next();
         }
-      } else {
-        return { done: true };
+        departmentIndex++;
+        employeeIndex = 0;
+        return this.next();
       }
+      return { done: true };
     },
     [Symbol.iterator]() {
       return this;
