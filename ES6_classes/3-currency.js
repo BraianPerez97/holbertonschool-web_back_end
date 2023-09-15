@@ -1,8 +1,3 @@
-/*
-    Make method
-    This can't with arrow,
-    because arrow function doesn't work with this
-*/
 export default class Currency {
   constructor(code = '', name = '') {
     this.code = code;
