@@ -16,11 +16,11 @@ export default class Airport {
     if (typeof value !== 'string') {
       throw new TypeError('name must be a string');
     }
-    this.name = value;
+    this._name = value;
   }
 
   get code() {
-    return this.code;
+    return this._code;
   }
 
   set code(value) {
